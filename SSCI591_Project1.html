@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California High Points Project</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <style>
+        #map {
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>California County High Points</h1>
+
+    <div id="map"></div>
+
+    <p id="output">Click the map to view coordinates.</p>
+
+    <table>
+        <tr>
+            <th>County</th>
+            <th>Name</th>
+            <th>Elevation (ft.)</th>
+            <th>Completed?</th>
+        </tr>
+
+        <tr>
+            <td>Alameda</td>
+            <td>Challenger Peak</td>
+            <td>3853.5</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Alpine</td>
+            <td>Sonora Peak</td>
+            <td>11462.8</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Amador</td>
+            <td>Thunder Mountain</td>
+            <td>9423.7</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Butte</td>
+            <td>Butte County High Point</td>
+            <td>7120.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Calaveras</td>
+            <td>Corral Hollow Hill</td>
+            <td>8170.1</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Colusa</td>
+            <td>Snow Mountain</td>
+            <td>7052.4</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Contra Costa</td>
+            <td>Mount Diablo</td>
+            <td>3848.5</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Del Norte</td>
+            <td>Bear Mountain</td>
+            <td>6400.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>El Dorado</td>
+            <td>Freel Peak</td>
+            <td>10882.9</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Fresno</td>
+            <td>North Palisade</td>
+            <td>14245.1</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Glenn</td>
+            <td>Black Butte</td>
+            <td>7452.9</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Humboldt</td>
+            <td>Salmon Mountain</td>
+            <td>6958.6</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Imperial</td>
+            <td>Blue Angels Peak</td>
+            <td>4551.7</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Inyo</td>
+            <td>Mount Whitney</td>
+            <td>14500.7</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Kern</td>
+            <td>Sawmill Mountain</td>
+            <td>8825.2</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Kings</td>
+            <td>Table Mountain</td>
+            <td>3475.9</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Lake</td>
+            <td>Snow Mountain</td>
+            <td>7052.4</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Lassen</td>
+            <td>Hat Mountain</td>
+            <td>8750.3</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Los Angeles</td>
+            <td>Mount San Antonio</td>
+            <td>10067.8</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Madera</td>
+            <td>Mount Ritter</td>
+            <td>13161.1</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Marin</td>
+            <td>Mount Tamalpais - West Peak</td>
+            <td>2576.8</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Mariposa</td>
+            <td>Parsons Peak - Northwest Ridge</td>
+            <td>12040.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Mendocino</td>
+            <td>Anthony Peak</td>
+            <td>6957.4</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Merced</td>
+            <td>Laveaga Peak</td>
+            <td>3802.5</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Modoc</td>
+            <td>Eagle Peak</td>
+            <td>9892.4</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Mono</td>
+            <td>White Mountain Peak</td>
+            <td>14244.8</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Monterey</td>
+            <td>Junipero Serra Peak</td>
+            <td>5859.2</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Napa</td>
+            <td>Mount Saint Helena - East Peak</td>
+            <td>4220.6</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Nevada</td>
+            <td>Mount Lola</td>
+            <td>9145.8</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Orange</td>
+            <td>Santiago Peak</td>
+            <td>5688.3</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Placer</td>
+            <td>Mount Baldy - West Ridge</td>
+            <td>9035.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Plumas</td>
+            <td>Mount Ingalls</td>
+            <td>8376.4</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Riverside</td>
+            <td>San Jacinto Peak</td>
+            <td>10809.3</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Sacramento</td>
+            <td>Carpenter Benchmark</td>
+            <td>830.9</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>San Benito</td>
+            <td>San Benito Mountain</td>
+            <td>5241.9</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>San Bernardino</td>
+            <td>San Gorgonio Mountain</td>
+            <td>11501.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>San Diego</td>
+            <td>Hot Springs Mountain</td>
+            <td>6532.4</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>San Francisco</td>
+            <td>Mount Davidson</td>
+            <td>932.2</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>San Joaquin</td>
+            <td>Boardman North</td>
+            <td>3632.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>San Luis Obispo</td>
+            <td>Caliente Mountain</td>
+            <td>5109.7</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>San Mateo</td>
+            <td>Long Ridge</td>
+            <td>2622.2</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Santa Barbara</td>
+            <td>Big Pine Mountain</td>
+            <td>6823.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Santa Clara</td>
+            <td>Copernicus Peak</td>
+            <td>4385.3</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Santa Cruz</td>
+            <td>Mount Bielawski</td>
+            <td>3235.7</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Shasta</td>
+            <td>Lassen Peak</td>
+            <td>10461.7</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Sierra</td>
+            <td>Mount Lola - North Ridge Peak</td>
+            <td>8855.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Siskiyou</td>
+            <td>Mount Shasta</td>
+            <td>14160.6</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Solano</td>
+            <td>Mount Vaca</td>
+            <td>2822.2</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Sonoma</td>
+            <td>Cobb Mountain - Southwest Peak</td>
+            <td>4495.3</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Stanislaus</td>
+            <td>Mount Stakes</td>
+            <td>3809.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Sutter</td>
+            <td>South Butte</td>
+            <td>2120.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Tehama</td>
+            <td>Brokeoff Mountain</td>
+            <td>9238.4</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Trinity</td>
+            <td>Mount Eddy</td>
+            <td>9032.8</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Tulare</td>
+            <td>Mount Whitney</td>
+            <td>14500.7</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Tuolumne</td>
+            <td>Mount Lyell</td>
+            <td>13118.5</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Ventura</td>
+            <td>Mount Pinos</td>
+            <td>8839.0</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Yolo</td>
+            <td>Little Blue Ridge</td>
+            <td>3133.5</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Yuba</td>
+            <td>Yuba County High Point</td>
+            <td>4825.0</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
